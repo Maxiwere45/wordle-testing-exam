@@ -59,6 +59,7 @@ npm run coverage
     - Test de l'état du jeu après une victoire ✅
     - Test de l'état du jeu après une défaite ✅
     - Test de l'état du jeu après le dépassement du nombre de tentatives ✅
+    - Test de réinitialisation de l'état du jeu ✅
 
 - Test de la logique du jeu avec un joueur définit
     - Test de la logique du jeu avec un joueur qui a gagné (mise à jour du nombre de parties gagnée) ✅

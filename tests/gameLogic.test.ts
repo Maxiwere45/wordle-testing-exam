@@ -2,6 +2,7 @@ import {describe, expect, test} from 'vitest'
 import { checkGuess } from '../src/modules/services/GameLogicService.ts'
 
 describe('GameLogic', () => {
+
     test('Guess the correct letters at the correct positions (green)', () => {
         // Arrange
         const guess = 'pomme';

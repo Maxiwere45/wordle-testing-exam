@@ -3,7 +3,7 @@ import WordleGame from "../src/modules/WordleGame"
 
 describe('GameState', () => {
     const dictionary = {
-        loadDictionaryWords: async () => ['pomme', 'poire', 'banane']
+        loadDictionaryWords: async () => ['pomme', 'poire', 'menus', 'tuile', 'tigre', 'femme'],
     };
 
     test('Reduce the number of attempts after each play', async () => {
@@ -24,7 +24,7 @@ describe('GameState', () => {
         await game.loadWordle();
 
         // Act
-        const result = game.play('banane');
+        const result = game.play('menus');
 
         // Assert
         expect(result).toBe(0);
@@ -77,6 +77,21 @@ describe('GameState', () => {
         // Assert
         expect(result).toBe(-2);
         expect(game.isGameOver()).toBe(true);
+        expect(game.isGameWon()).toBe(false);
+    });
+
+    test('Reset the game state', async () => {
+        // Arrange
+        const game = new WordleGame({ loadWordle: async () => 'pomme' }, dictionary.loadDictionaryWords());
+        await game.loadWordle();
+
+        // Act
+        game.play('tigre');
+        await game.resetGame({ loadWordle: async () => 'poire' }, dictionary.loadDictionaryWords());
+
+        // Assert
+        expect(game.getAttemptsRemaining()).toBe(5);
+        expect(game.isGameOver()).toBe(false);
         expect(game.isGameWon()).toBe(false);
     });
 });

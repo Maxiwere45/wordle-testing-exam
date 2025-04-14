@@ -1,6 +1,9 @@
 export type WordValidationRule = (word: string, dictionaryWord?: string[]) => boolean;
 type Rule = WordValidationRule;
 
+/**
+ * Liste des règles de validation des mots
+ */
 export const WordValidationRules = {
     // should only have 5 letters
     exactlen: (word: string) => word.length == 5,
@@ -12,10 +15,16 @@ export const WordValidationRules = {
     }
 }
 
+/**
+ * Interface pour charger les mots du dictionnaire
+ */
 interface DictionaryWord {
     loadDictionaryWords: () => Promise<string[]>;
 }
 
+/**
+ * Service de validation des mots
+ */
 export class WordValidationService {
     private dictionary: string[] = [];
     constructor(private rules: Rule[] = [], private dictionaryWord?: DictionaryWord) {}

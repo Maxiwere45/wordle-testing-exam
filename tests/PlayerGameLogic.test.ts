@@ -4,7 +4,7 @@ import Player from "../src/entites/Player";
 
 describe('PlayerGameLogic', () => {
     const dictionary = {
-        loadDictionaryWords: async () => ['pomme', 'poire', 'banane']
+        loadDictionaryWords: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
     };
 
     test("Player's wins should be updated after a win", async () => {
@@ -36,7 +36,7 @@ describe('PlayerGameLogic', () => {
 
         // Act
         for (let i = 0; i < 6; i++) {
-            game.play('banane');
+            game.play('tigre');
         }
 
         // Assert
@@ -74,7 +74,7 @@ describe('PlayerGameLogic', () => {
         game.play('pomme');
 
         // Assert
-        expect(player.getAverageAttempts()).toEqual(4);
+        expect(player.getAverageAttempts()).toEqual(1);
     });
 
     test("Player's win rate should be updated after a game", async () => {

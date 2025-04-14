@@ -1,5 +1,5 @@
 /**
- * Fonction pour vérifier la validité d'un mot par rapport à un mot cible
+ * Vérifie la validité d'un mot par rapport à un mot cible
  * @param guess - Le mot proposé par le joueur
  * @param word - Le mot cible à deviner
  */
