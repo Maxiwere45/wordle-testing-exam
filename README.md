@@ -37,7 +37,7 @@ npm test
 - Pour les tests de couverture, utilisez :
 
 ```bash
-npm run coverage
+npm run test-coverage
 ```
 
 ### Liste des tests implementés
