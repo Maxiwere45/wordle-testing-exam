@@ -48,15 +48,15 @@ class WordleGame {
         const dictService = new WordValidationService([WordValidationRules.inDictionary], this.dictionnaryWords);
 
         if (! await lenService.validate(word)) {
-            throw new Error('Word should only have 5 letters');
+            throw new Error('Le mot doit avoir 5 lettres !');
         }
 
         if (! await letterService.validate(word)) {
-            throw new Error('Word should only have letters');
+            throw new Error('Le mot doit contenir uniquement des lettres !');
         }
 
         if (! await dictService.validate(word)) {
-            throw new Error('Word should be in the dictionary');
+            throw new Error('Le mot n\'est pas dans le dictionnaire !');
         }
 
         return true;

@@ -5,11 +5,27 @@ import Player from "./entites/Player.ts";
 import {DictionaryApiService} from "./modules/repositories/DictionnaryApiService.ts";
 import {WordleApiService} from "./modules/repositories/WordleApiService.ts";
 
+
 const dictionaryService = DictionaryApiService();
 const wordleService = WordleApiService();
+let username: string | null = null;
+let player: Player;
+let game: WordleGame;
 
-const player = new Player("Amdjad");
-const game = new WordleGame(wordleService, dictionaryService, player);
+window.addEventListener('load', async () => {
+    username = window.prompt("Nom d'utilisateur:");
+    if (username) {
+        alert(`Bienvenue, ${username}!`);
+    } else {
+        alert("Aucun nom d'utilisateur fourni. Utilisation de 'Anonymous'.");
+        username = 'Anonymous';
+    }
+
+    player = new Player(username);
+    game = new WordleGame(wordleService, dictionaryService, player);
+
+    await game.loadWordle();
+});
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="container">
@@ -70,8 +86,6 @@ document.getElementById('statsBtn')?.addEventListener('click', () => {
     `);
     }
 });
-
-await game.loadWordle();
 
 const inputs = document.querySelectorAll<HTMLInputElement>('.letter-input');
 const submitBtn = document.getElementById('submitBtn')!;
