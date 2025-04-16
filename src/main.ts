@@ -2,15 +2,14 @@ import './style.css';
 import WordleGame from './modules/WordleGame.ts';
 import {checkGuess} from "./modules/services/GameLogicService.ts";
 import Player from "./entites/Player.ts";
+import {DictionaryApiService} from "./modules/repositories/DictionnaryApiService.ts";
+import {WordleApiService} from "./modules/repositories/WordleApiService.ts";
 
-// Exemple de dictionnaire + mot à deviner
-const mockDictionary = Promise.resolve(['pomme', 'tuile', 'huile', 'puits', 'jaune']);
-const mockWordProvider = {
-    loadWordle: async () => 'jaune'
-};
+const dictionaryService = DictionaryApiService();
+const wordleService = WordleApiService();
 
 const player = new Player("Amdjad");
-const game = new WordleGame(mockWordProvider, mockDictionary, player);
+const game = new WordleGame(wordleService, dictionaryService, player);
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div class="container">
@@ -143,7 +142,7 @@ submitBtn.addEventListener('click', async () => {
 });
 
 resetBtn.addEventListener('click', async () => {
-    await game.resetGame(mockWordProvider, mockDictionary);
+    await game.resetGame(wordleService, dictionaryService);
     inputs.forEach(input => {
         input.value = '';
         input.classList.remove('green', 'yellow', 'gray');

@@ -3,12 +3,12 @@ import WordleGame from "../src/modules/WordleGame"
 
 describe('GameState', () => {
     const dictionary = {
-        loadDictionaryWords: async () => ['pomme', 'poire', 'menus', 'tuile', 'tigre', 'femme'],
+        loadDictionary: async () => ['pomme', 'poire', 'menus', 'tuile', 'tigre', 'femme'],
     };
 
     test('Reduce the number of attempts after each play', async () => {
         // Arrange
-        const game = new WordleGame({ loadWordle: async () => 'pomme' }, dictionary.loadDictionaryWords());
+        const game = new WordleGame({loadWordle: async () => 'pomme'}, dictionary);
         await game.loadWordle();
 
         // Act
@@ -20,7 +20,7 @@ describe('GameState', () => {
 
     test('Detect a continuation if the word is not found', async () => {
         // Arrange
-        const game = new WordleGame({ loadWordle: async () => 'pomme' }, dictionary.loadDictionaryWords());
+        const game = new WordleGame({loadWordle: async () => 'poire'}, dictionary);
         await game.loadWordle();
 
         // Act
@@ -32,7 +32,7 @@ describe('GameState', () => {
 
     test('Detect a won if the word is found', async () => {
         // Arrange
-        const game = new WordleGame({ loadWordle: async () => 'pomme' }, dictionary.loadDictionaryWords());
+        const game = new WordleGame({loadWordle: async () => 'pomme'}, dictionary);
         await game.loadWordle();
 
         // Act
@@ -46,7 +46,7 @@ describe('GameState', () => {
 
     test('Detect the game over after 6 attempts', async () => {
         // Arrange
-        const game = new WordleGame({ loadWordle: async () => 'pomme' }, dictionary.loadDictionaryWords());
+        const game = new WordleGame({loadWordle: async () => 'poire'}, dictionary);
         await game.loadWordle();
 
         // Act
@@ -64,7 +64,7 @@ describe('GameState', () => {
 
     test('Block the game after 6 attempts', async () => {
         // Arrange
-        const game = new WordleGame({ loadWordle: async () => 'pomme' }, dictionary.loadDictionaryWords());
+        const game = new WordleGame({loadWordle: async () => 'pomme'}, dictionary);
         await game.loadWordle();
 
         // Act
@@ -82,12 +82,12 @@ describe('GameState', () => {
 
     test('Reset the game state', async () => {
         // Arrange
-        const game = new WordleGame({ loadWordle: async () => 'pomme' }, dictionary.loadDictionaryWords());
+        const game = new WordleGame({loadWordle: async () => 'tigre'}, dictionary);
         await game.loadWordle();
 
         // Act
         game.play('tigre');
-        await game.resetGame({ loadWordle: async () => 'poire' }, dictionary.loadDictionaryWords());
+        await game.resetGame({loadWordle: async () => 'poire'}, dictionary);
 
         // Assert
         expect(game.getAttemptsRemaining()).toBe(5);

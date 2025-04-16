@@ -1,12 +1,10 @@
 import {WordValidationRules, WordValidationService} from "./services/WordValidatorService.ts";
 import {checkGuess} from "./services/GameLogicService.ts";
-import {arraysEqual} from "./utils/ArrayUtils.ts";
+import {arraysEqual} from "./utils/utils.ts";
 import Player from "../entites/Player.ts";
+import {WordleApiService} from "./repositories/WordleApiService.ts";
+import {DictionaryApiService} from "./repositories/DictionnaryApiService.ts";
 
-
-interface WordleWord {
-    loadWordle: () => Promise<string>;
-}
 
 /**
  * Classe représentant un jeu de Wordle
@@ -28,8 +26,8 @@ class WordleGame {
      * @param maxAttempts - Nombre maximum de tentatives
      */
     constructor(
-        private wordleWords: WordleWord,
-        private dictionnaryWords: Promise<string[]>,
+        private wordleWords: WordleApiService,
+        private dictionnaryWords: DictionaryApiService,
         private player?: Player,
         game_mode?: string,
         maxAttempts?: number
@@ -47,7 +45,7 @@ class WordleGame {
         //! le lenService ne fonctionnera pas si le mot est > 5 (à fixer)
         const lenService = new WordValidationService([WordValidationRules.exactlen]);
         const letterService = new WordValidationService([WordValidationRules.onlyletters]);
-        const dictService = new WordValidationService([WordValidationRules.inDictionary], { loadDictionaryWords: async () => this.dictionnaryWords });
+        const dictService = new WordValidationService([WordValidationRules.inDictionary], this.dictionnaryWords);
 
         if (! await lenService.validate(word)) {
             throw new Error('Word should only have 5 letters');
@@ -116,18 +114,18 @@ class WordleGame {
     /**
      * Réinitialise le jeu
      * @param wordleWords - Mots de Wordle
-     * @param dictionnaryWords - Mots du dictionnaire
+     * @param dictionaryLoader - Mots du dictionnaire
      * @param game_mode - Mode de jeu
      * @param maxAttempts - Nombre maximum de tentatives
      */
     public async resetGame(
-        wordleWords: WordleWord,
-        dictionnaryWords: Promise<string[]>,
+        wordleWords: WordleApiService,
+        dictionaryLoader: DictionaryApiService,
         game_mode?: string,
         maxAttempts?: number
     ) {
         this.wordleWords = wordleWords;
-        this.dictionnaryWords = dictionnaryWords;
+        this.dictionnaryWords = dictionaryLoader;
         this.attemptRemaining = 5;
         this.gameOver = false;
         this.gameWon = false;

@@ -1,3 +1,4 @@
+
 /**
  * Vérifie si deux tableaux sont égaux en valeur
  * @param arr1 - Le premier tableau à comparer

@@ -38,7 +38,7 @@ describe('WordValidator', () => {
         // Arrange
         const wrongWord = "Banane";
         const rightWord = "Pomme";
-        const service = new WordValidationService([rules.inDictionary], { loadDictionaryWords: async () => ['Pomme', 'Poire'] });
+        const service = new WordValidationService([rules.inDictionary], { loadDictionary: async () => ['Pomme', 'Poire'] });
 
         // Act
         const wrongResult = await service.validate(wrongWord);

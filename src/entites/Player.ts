@@ -1,7 +1,7 @@
 /**
- * Interface représantant l'historique d'une partie
+ * Type de l'historique d'une partie
  */
-interface GameHistory {
+export type GameHistory = {
     word: string;
     attempts: number;
     result: boolean;

@@ -1,3 +1,5 @@
+import {DictionaryApiService} from "../repositories/DictionnaryApiService.ts";
+
 export type WordValidationRule = (word: string, dictionaryWord?: string[]) => boolean;
 type Rule = WordValidationRule;
 
@@ -16,22 +18,15 @@ export const WordValidationRules = {
 }
 
 /**
- * Interface pour charger les mots du dictionnaire
- */
-interface DictionaryWord {
-    loadDictionaryWords: () => Promise<string[]>;
-}
-
-/**
  * Service de validation des mots
  */
 export class WordValidationService {
     private dictionary: string[] = [];
-    constructor(private rules: Rule[] = [], private dictionaryWord?: DictionaryWord) {}
+    constructor(private rules: Rule[] = [], private dictionaryWord?: DictionaryApiService) {}
 
     async validate(word: string) {
         if (this.dictionaryWord) {
-            this.dictionary = await this.dictionaryWord.loadDictionaryWords();
+            this.dictionary = await this.dictionaryWord.loadDictionary();
         }
 
         for (const rule of this.rules) {
