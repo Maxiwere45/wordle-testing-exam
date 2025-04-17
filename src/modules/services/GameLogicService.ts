@@ -1,7 +1,7 @@
 /**
- * Vérifie la validité d'un mot par rapport à un mot cible
- * @param guess - Le mot proposé par le joueur
- * @param word - Le mot cible à deviner
+ * Check if the guess is correct and return the result
+ * @param guess - The guessed word
+ * @param word - The word to guess
  */
 const checkGuess = (guess: string, word: string): string[] => {
     const result: string[] = Array(word.length).fill('gray'); // Initialiser toutes les lettres en gris

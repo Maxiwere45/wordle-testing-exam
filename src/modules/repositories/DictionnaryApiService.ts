@@ -1,22 +1,22 @@
 
 /**
  * @module DictionaryApiService
- * @description Service pour charger les mots du dictionnaire
+ * @description Service to load words from a dictionary file.
  */
 export type DictionaryApiService = {
     loadDictionary: (filePath?: string) => Promise<string[]>;
 }
 
 /**
- * Service pour charger les mots du dictionnaire
- * @returns Un tableau de mots
+ * Service to load words from a dictionary file.
+ * @returns {DictionaryApiService} - An object containing the loadDictionary function.
  */
 export const DictionaryApiService = (): DictionaryApiService => {
 
     /**
-     * Charge le dictionnaire à partir d'un fichier
-     * @param filePath - Chemin du fichier de dictionnaire
-     * @returns Un tableau de mots
+     * Load the dictionary from a file.
+     * @param filePath - The path to the dictionary file.
+     * @returns {Promise<string[]>} - A promise that resolves to an array of words.
      */
     const loadDictionary = async (filePath?: string): Promise<string[]> => {
         const response = await fetch(filePath ?? '/liste_mots_fr.txt');

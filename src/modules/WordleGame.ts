@@ -7,7 +7,7 @@ import {DictionaryApiService} from "./repositories/DictionnaryApiService.ts";
 
 
 /**
- * Classe représentant un jeu de Wordle
+ * Class representing a Wordle game.
  */
 class WordleGame {
     private game_mode: string = 'normal';
@@ -18,16 +18,16 @@ class WordleGame {
     private gameWon: boolean = false;
 
     /**
-     * Constructeur de la classe WordleGame
-     * @param wordleWords - Mots de Wordle
-     * @param dictionnaryWords - Mots du dictionnaire
-     * @param player - Joueur
-     * @param game_mode - Mode de jeu
-     * @param maxAttempts - Nombre maximum de tentatives
+     * Constructor for the WordleGame class.
+     * @param wordleWords - Service to load Wordle words
+     * @param dictionaryWords - Service to load dictionary words
+     * @param player - Player object
+     * @param game_mode - Game mode (normal, hard, etc.)
+     * @param maxAttempts - Maximum number of attempts
      */
     constructor(
         private wordleWords: WordleApiService,
-        private dictionnaryWords: DictionaryApiService,
+        private dictionaryWords: DictionaryApiService,
         private player?: Player,
         game_mode?: string,
         maxAttempts?: number
@@ -38,14 +38,14 @@ class WordleGame {
     }
 
     /**
-     * Vérifie si le mot est valide via les règles de validation
-     * @param word - Le mot à vérifier
+     * Check if the word is valid.
+     * @param word
      */
     public async isValidWord(word: string) {
         //! le lenService ne fonctionnera pas si le mot est > 5 (à fixer)
         const lenService = new WordValidationService([WordValidationRules.exactlen]);
         const letterService = new WordValidationService([WordValidationRules.onlyletters]);
-        const dictService = new WordValidationService([WordValidationRules.inDictionary], this.dictionnaryWords);
+        const dictService = new WordValidationService([WordValidationRules.inDictionary], this.dictionaryWords);
 
         if (! await lenService.validate(word)) {
             throw new Error('Le mot doit avoir 5 lettres !');
@@ -63,7 +63,7 @@ class WordleGame {
     }
 
     /**
-     * Charge le mot de Wordle depuis le service
+     * Load the Wordle word.
      */
     async loadWordle(): Promise<void> {
         const word = await this.wordleWords.loadWordle();
@@ -77,10 +77,9 @@ class WordleGame {
     }
 
     /**
-     * Joue un mot dans le jeu
-     * @param word - Le mot à jouer
-     * @returns 1 si gagné, -1 si perdu, 0 si en cours, -2 si plus de tentatives
-     * @throws Error si le mot n'est pas valide ou si le jeu est terminé
+     * Play the game with the given word.
+     * @param word - The word to guess
+     * @returns 1 if the game is won, -1 if lost, 0 if continue, -2 if no attempts remaining
      */
     play(word: string) {
         if (!this.wordle) {
@@ -112,11 +111,11 @@ class WordleGame {
     }
 
     /**
-     * Réinitialise le jeu
-     * @param wordleWords - Mots de Wordle
-     * @param dictionaryLoader - Mots du dictionnaire
-     * @param game_mode - Mode de jeu
-     * @param maxAttempts - Nombre maximum de tentatives
+     * Reset the game.
+     * @param wordleWords - Service to load Wordle words
+     * @param dictionaryLoader - Service to load dictionary words
+     * @param game_mode - Game mode (normal, hard, etc.)
+     * @param maxAttempts - Maximum number of attempts
      */
     public async resetGame(
         wordleWords: WordleApiService,
@@ -125,7 +124,7 @@ class WordleGame {
         maxAttempts?: number
     ) {
         this.wordleWords = wordleWords;
-        this.dictionnaryWords = dictionaryLoader;
+        this.dictionaryWords = dictionaryLoader;
         this.attemptRemaining = 5;
         this.gameOver = false;
         this.gameWon = false;
@@ -134,50 +133,26 @@ class WordleGame {
         await this.loadWordle();
     }
 
-    /**
-     * Récupère le compteur de tentatives restantes
-     * @returns Le compteur de tentatives restantes
-     */
     getWordle() {
         return this.wordle;
     }
 
-    /**
-     * Récupère le mot de Wordle
-     * @returns Le mot de Wordle
-     */
     getMaxAttempts() {
         return this.maxAttempts;
     }
 
-    /**
-     * Récupère le mode de jeu
-     * @returns Le mode de jeu
-     */
     getGameMode() {
         return this.game_mode;
     }
 
-    /**
-     * Récupère le nombre de tentatives restantes
-     * @returns Le nombre de tentatives restantes
-     */
     getAttemptsRemaining() {
         return this.attemptRemaining;
     }
 
-    /**
-     * Récupère le joueur
-     * @returns Le joueur
-     */
     isGameOver() {
         return this.gameOver;
     }
 
-    /**
-     * Récupère le joueur
-     * @returns Le joueur
-     */
     isGameWon() {
         return this.gameWon;
     }
