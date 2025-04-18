@@ -1,5 +1,3 @@
-import {DictionaryApiService} from "./repositories/DictionnaryApiService.ts";
-
 export type WordValidationRule = (word: string, dictionaryWord?: string[]) => boolean;
 type Rule = WordValidationRule;
 
@@ -23,7 +21,7 @@ export const WordValidationRules = {
  */
 export class WordValidationService {
     private dictionary: string[] = [];
-    constructor(private rules: Rule[] = [], private dictionaryWord?: DictionaryApiService) {}
+    constructor(private rules: Rule[] = [], private dictionaryWord?: any) {}
 
     async validate(word: string) {
         if (this.dictionaryWord) {

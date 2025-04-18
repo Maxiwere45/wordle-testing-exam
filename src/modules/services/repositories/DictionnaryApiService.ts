@@ -1,17 +1,8 @@
-
-/**
- * @module DictionaryApiService
- * @description Service to load words from a dictionary file.
- */
-export type DictionaryApiService = {
-    loadDictionary: (filePath?: string) => Promise<string[]>;
-}
-
 /**
  * Service to load words from a dictionary file.
  * @returns {DictionaryApiService} - An object containing the loadDictionary function.
  */
-export const DictionaryApiService = (): DictionaryApiService => {
+export const DictionaryApiService = () => {
 
     /**
      * Load the dictionary from a file.
