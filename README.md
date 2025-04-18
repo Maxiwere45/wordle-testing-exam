@@ -54,6 +54,10 @@ npm run test-coverage
     - Test de la logique de vérification des lettres en double ✅
 
 - Test de l'état du jeu
+    - Test de blocage du jeu si le wordle n'est pas chargé ✅
+    - Test de blocage du jeu si le wordle n'est pas de longueur 5 ✅
+    - Test de blocage du jeu si le wordle n'est pas alphanumérique ✅
+    - Test de blocage du jeu si le wordle n'est pas dans le dictionnaire ✅
     - Test de l'état du compteur de tentatives après chaque essai ✅
     - Test de l'état du jeu après une tentative non réussie ✅
     - Test de l'état du jeu après une victoire ✅
@@ -61,11 +65,14 @@ npm run test-coverage
     - Test de l'état du jeu après le dépassement du nombre de tentatives ✅
     - Test de réinitialisation de l'état du jeu ✅
 
-- Test de la logique du jeu avec un joueur définit
+- Test de la logique du jeu avec un joueur défini
+    - Test de la logique du jeu si le joueur propose un mot n'ayant pas 5 lettres ✅
+    - Test de la logique du jeu si le joueur propose un mot n'étant pas alphanumérique ✅
+    - Test de la logique du jeu si le joueur propose un mot n'étant pas dans le dictionnaire ✅
     - Test de la logique du jeu avec un joueur qui a gagné (mise à jour du nombre de parties gagnée) ✅
     - Test de la logique du jeu avec un joueur qui a gagné (mise à jour des essais moyens du joueur) ✅
     - Test de la logique du jeu avec un joueur qui a gagné (mise à jour du taux de réussite du joueur) ✅
-    - Test de la logique du jeu avec un joueur qui a gagné après 2 parties successif (mise à jour des streak du joueur) ✅
+    - Test de la logique du jeu avec un joueur qui a gagné après 2 parties successives (mise à jour des streak du joueur) ✅
     - Test de la logique du jeu avec un joueur qui a gagné (mise à jour du score du joueur) ✅
 
 

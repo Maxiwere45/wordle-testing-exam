@@ -1,7 +1,7 @@
 import {describe, expect, test} from 'vitest'
 import {WordValidationRules, WordValidationService} from '../src/modules/services/WordValidatorService.ts'
 
-describe('WordValidator', () => {
+describe('WordValidatorService', () => {
     const rules = WordValidationRules;
 
     test('Word should be 5 letter long', async () => {

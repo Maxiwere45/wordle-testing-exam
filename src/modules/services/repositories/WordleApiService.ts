@@ -17,7 +17,6 @@ export type WordleApiService = {
  * @returns {WordleApiService} - An object containing the loadWordle function.
  */
 export const WordleApiService = (): WordleApiService => {
-
     /**
      * Load a random word from the dictionary.
      * @returns {Promise<string>} - A promise that resolves to a random word.

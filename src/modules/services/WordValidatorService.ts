@@ -1,4 +1,4 @@
-import {DictionaryApiService} from "../repositories/DictionnaryApiService.ts";
+import {DictionaryApiService} from "./repositories/DictionnaryApiService.ts";
 
 export type WordValidationRule = (word: string, dictionaryWord?: string[]) => boolean;
 type Rule = WordValidationRule;

@@ -2,8 +2,8 @@ import './style.css';
 import WordleGame from './modules/WordleGame.ts';
 import {checkGuess} from "./modules/services/GameLogicService.ts";
 import Player from "./entites/Player.ts";
-import {DictionaryApiService} from "./modules/repositories/DictionnaryApiService.ts";
-import {WordleApiService} from "./modules/repositories/WordleApiService.ts";
+import {DictionaryApiService} from "./modules/services/repositories/DictionnaryApiService.ts";
+import {WordleApiService} from "./modules/services/repositories/WordleApiService.ts";
 
 
 const dictionaryService = DictionaryApiService();
@@ -129,7 +129,7 @@ submitBtn.addEventListener('click', async () => {
         return;
     }
 
-    const result = game.play(guess);
+    const result = await game.play(guess);
     const feedback = checkGuess(guess, game.getWordle()!);
 
     feedback.forEach((status, i) => {

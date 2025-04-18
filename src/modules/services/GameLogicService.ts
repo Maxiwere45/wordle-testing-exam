@@ -17,7 +17,7 @@ const checkGuess = (guess: string, word: string): string[] => {
         }
     }
 
-    // Vérifier les lettres correctes mais mal placées (jaune)
+    // Vérifier les lettres correctes, mais mal placées (jaune)
     for (let i = 0; i < guessLetters.length; i++) {
         if (result[i] !== 'green' && wordLetters.includes(guessLetters[i])) {
             result[i] = 'yellow';

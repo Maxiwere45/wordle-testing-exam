@@ -7,7 +7,7 @@ export default defineConfig({
                 'public/**',
                 'vitest.config.ts',
                 'src/vite-env.d.ts',
-                'src/modules/repositories/**',
+                'src/modules/services/repositories/**',
                 'src/main.ts',
             ],
         },
