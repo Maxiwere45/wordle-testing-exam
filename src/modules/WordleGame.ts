@@ -49,8 +49,8 @@ class WordleGame {
      */
     public async isValidWord(word: string) {
         //! le lenService ne fonctionnera pas si le mot est > 5 (à fixer)
-        const lenService = new WordValidationService([WordValidationRules.exactlen]);
-        const letterService = new WordValidationService([WordValidationRules.onlyletters]);
+        const lenService = new WordValidationService([WordValidationRules.exactLen]);
+        const letterService = new WordValidationService([WordValidationRules.onlyLetters]);
         const dictService = new WordValidationService([WordValidationRules.inDictionary], this.dictionaryService);
 
         if (!await lenService.validate(word)) {

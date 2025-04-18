@@ -8,7 +8,7 @@ describe('WordValidatorService', () => {
         // Arrange
         const wrongWord = "Banane";
         const rightWord = "Pomme";
-        const service = new WordValidationService([rules.exactlen]);
+        const service = new WordValidationService([rules.exactLen]);
 
         // Act
         const wrongResult = await service.validate(wrongWord);
@@ -23,7 +23,7 @@ describe('WordValidatorService', () => {
         // Arrange
         const wrongWord = "spel5";
         const rightWord = "Pomme";
-        const service = new WordValidationService([rules.onlyletters]);
+        const service = new WordValidationService([rules.onlyLetters]);
 
         // Act
         const wrongResult = await service.validate(wrongWord);

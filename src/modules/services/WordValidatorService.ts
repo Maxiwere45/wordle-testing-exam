@@ -7,9 +7,9 @@ type Rule = WordValidationRule;
  */
 export const WordValidationRules = {
     // should only have 5 letters
-    exactlen: (word: string): boolean => word.length == 5,
+    exactLen: (word: string): boolean => word.length == 5,
     // should only have letters
-    onlyletters: (word: string): boolean => /^[a-zA-Z]+$/.test(word),
+    onlyLetters: (word: string): boolean => /^[a-zA-Z]+$/.test(word),
     // Should be in the dictionary
     inDictionary: (word: string, dictionaryWord?: string[]): boolean => {
         return Array.isArray(dictionaryWord) && dictionaryWord.includes(word);
