@@ -26,6 +26,9 @@ Pour lancer le projet, utilisez la commande suivante :
 npm run dev
 ```
 
+Cela lancera le serveur de développement et vous pourrez accéder à l'application via votre navigateur à l'adresse suivante :
+- [localhost:5173](http://localhost:5173/)
+
 ## Tests
 
 - Pour lancer les tests, utilisez la commande suivante :

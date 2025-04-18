@@ -1,9 +1,8 @@
 /**
  * Service to load words from a dictionary file.
- * @returns {DictionaryApiService} - An object containing the loadDictionary function.
+ * @returns DictionaryService - An object containing the loadDictionary function.
  */
 export const DictionaryApiService = () => {
-
     /**
      * Load the dictionary from a file.
      * @param filePath - The path to the dictionary file.

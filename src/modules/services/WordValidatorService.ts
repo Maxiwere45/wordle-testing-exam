@@ -2,7 +2,7 @@ export type WordValidationRule = (word: string, dictionaryWord?: string[]) => bo
 type Rule = WordValidationRule;
 
 /**
- * Worldle validation rules
+ * Wordle validation rules
  * @description Rules to validate a word
  */
 export const WordValidationRules = {

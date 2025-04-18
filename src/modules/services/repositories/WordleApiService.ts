@@ -2,7 +2,7 @@ import {DictionaryApiService} from "./DictionnaryApiService.ts";
 
 /**
  * Service to load a random word from the dictionary.
- * @returns {WordleApiService} - An object containing the loadWordle function.
+ * @returns WordleService - An object containing the loadWordle function.
  */
 export const WordleApiService = () => {
     /**
@@ -13,7 +13,7 @@ export const WordleApiService = () => {
         const dictionaryService = DictionaryApiService();
         const loadDictionary = dictionaryService.loadDictionary('/liste_mots_fr.txt');
         const words = await loadDictionary;
-        const randomIndex = Math.floor(Math.random() * words.length);
+        const randomIndex = Math.abs(Math.floor(Math.random() * words.length));
         return words[randomIndex].toLowerCase();
     }
     return { loadWordle };
