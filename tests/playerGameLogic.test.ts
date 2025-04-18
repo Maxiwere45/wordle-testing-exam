@@ -3,16 +3,15 @@ import WordleGame from "../src/modules/WordleGame";
 import Player from "../src/entites/Player";
 
 describe('PlayerGameLogic', () => {
-    const dictionaryService = {
-        loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
-    };
 
     test('Should reject the word is not 5 letters long on play', async () => {
         // Arrange
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -26,7 +25,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -40,7 +41,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -54,7 +57,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -71,7 +76,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -90,7 +97,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -107,7 +116,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -124,7 +135,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
@@ -139,26 +152,36 @@ describe('PlayerGameLogic', () => {
     test("Player's streak should be updated to 1 after 2 wins", async () => {
         // Arrange
         const player = new Player("testPlayer");
+        expect(player.getStreaks()).toEqual(0);
+
+        // Game 1
         const game1 = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
-
         await game1.loadWordle();
 
+        // Act & Assert game 1
+        await game1.play('pomme');
+        expect(player.getWins()).toEqual(1);
+        expect(player.getStreaks()).toEqual(0);
+
+        // Game 2
         const game2 = new WordleGame(
             {loadWordle: async () => 'poire'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game2.loadWordle();
 
-        // Act
-        await game1.play('pomme');
+        // Act & Assert game 2
         await game2.play('poire');
-
-        // Assert
+        expect(player.getWins()).toEqual(2);
         expect(player.getStreaks()).toEqual(1);
     });
 
@@ -167,7 +190,9 @@ describe('PlayerGameLogic', () => {
         const player = new Player("testPlayer");
         const game = new WordleGame(
             {loadWordle: async () => 'pomme'},
-            dictionaryService,
+            {
+                loadDictionary: async () => ['pomme', 'poire', 'banane', 'tuile', 'tigre', 'femme'],
+            },
             player
         );
         await game.loadWordle();
